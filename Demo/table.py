@@ -7,7 +7,7 @@ import os
 
 from openpyxl.styles import PatternFill
 from openpyxl.styles import Font
-
+import config
 temp = 'template.xlsx'
 output = "./output.xlsx"
 excelfile = './biao.xlsx'
@@ -47,7 +47,14 @@ def read_excel():
 
 	# list1 = [1,2,3]
 	# list1.append(4)
-	# print(rows)
+	print("rows %s, cols %s" % (rows, cols))
+
+	# rows = 7704
+	# cols = 8
+	dict_conf = config.ReadConfig()
+	rows = dict_conf['row']
+	cols = dict_conf['col']
+
 
 
 	list_Fapiao_num = []
@@ -60,8 +67,8 @@ def read_excel():
 			# print('%s' % cell_context)
 			list_per_row.append(cell_context)
 
-		# context = list_per_row[2]
-		# print('%s' % context)
+		context = list_per_row[2]
+		# print('row%d %s' % (row, context))
 		if isinstance(list_per_row[2], str):
 			list_per_row[2] = list_per_row[2].zfill(8)
 		else:
@@ -73,7 +80,7 @@ def read_excel():
 
 	# 按第三列排序
 	list_all = sorted(list_all, key=(lambda x: x[2]), reverse=False)
-	print("list_Fapiao_num %s " % list_all)
+	# print("list_Fapiao_num %s " % list_all)
 
 
 

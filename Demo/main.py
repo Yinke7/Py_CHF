@@ -12,8 +12,12 @@ def print_hi(name):
 
 
 # Press the green button in the gutter to run the script.
+
+VERSION = r'Ver: 1.1'
+
 if __name__ == '__main__':
     # print_hi('PyCharm')
+    print(VERSION)
     table.read_excel()
     table.write_excel()
     table.check()
