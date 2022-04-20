@@ -12,11 +12,11 @@ def ReadConfig():
         res = re.search(r'row:(.\d*),col:(.\d*)', line)
         dict_conf['row'] = int(res.group(1))
         dict_conf['col'] = int(res.group(2))
-        print(dict_conf)
+        # print(dict_conf)
         f.close()
     else:
-        print("no config file found")
-        return
+        # print("no config file found")
+        return None
     return dict_conf
 
 if __name__ == '__main__':
