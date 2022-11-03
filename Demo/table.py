@@ -59,9 +59,8 @@ def read_excel():
 		ShowMsg(r'缺少配置文件')
 		return
 	# print('配置文件读取到数据：行数%d 列数%d' % (dict_conf['row'], dict_conf['col']))
-	rows = dict_conf['row']
-	cols = dict_conf['col']
-
+	rows = dict_conf['row'] + 1		# range(a,b)为左闭右开区间，这里为右边最后一位做补偿
+	cols = dict_conf['col'] + 1
 
 
 	list_Fapiao_num = []
@@ -176,6 +175,8 @@ def write_excel():
 
 def check():
 
+	para = config.ReadConfig()
+
 	workbook = openpyxl.load_workbook(filename=output)
 	# print(workbook)
 	# 可以使用workbook对象的sheetnames属性获取到excel文件中哪些表有数据
@@ -185,13 +186,15 @@ def check():
 	# font = Font(u'微软雅黑', size=11, bold=True, italic=False, strike=False, color=123456"")  # 设置字体样式
 
 	global list_read
+	print("len", len(list_read))
 
 	list_flag = []
-	for row in range(rows - 2 - 9):
-		if list_read[row][2] is None or list_read[row + 9][2] is None:
+	count = para['continuous'] - 1
+	for row in range(rows - 2 - count):
+		if list_read[row][2] is None or list_read[row + count][2] is None:
 			continue
-		if int(list_read[row + 9][2]) - 9 == int(list_read[row][2]):
-			list_flag.append(row + 9)
+		if int(list_read[row + count][2]) - count == int(list_read[row][2]):
+			list_flag.append(row + count)
 
 	# print(list_flag)
 
